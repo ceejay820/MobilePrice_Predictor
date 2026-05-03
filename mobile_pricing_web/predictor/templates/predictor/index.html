@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +17,12 @@
             --success: #10b981;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
 
         body {
             background-color: var(--bg);
@@ -25,7 +31,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden; /* Prevent scrolling */
+            overflow: hidden;
+            /* Prevent scrolling */
         }
 
         .container {
@@ -34,7 +41,7 @@
             background: var(--card);
             padding: 1.5rem;
             border-radius: 16px;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
             border: 1px solid var(--border);
         }
 
@@ -47,7 +54,11 @@
             padding-bottom: 0.75rem;
         }
 
-        h1 { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
 
         .prediction-box {
             background: #f0fdf4;
@@ -59,8 +70,18 @@
             gap: 0.5rem;
         }
 
-        .prediction-label { font-size: 0.8rem; font-weight: 600; color: #166534; text-transform: uppercase; }
-        .prediction-value { font-size: 1.1rem; font-weight: 700; color: var(--success); }
+        .prediction-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #166534;
+            text-transform: uppercase;
+        }
+
+        .prediction-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--success);
+        }
 
         .form-grid {
             display: grid;
@@ -68,11 +89,20 @@
             gap: 0.75rem;
         }
 
-        .input-group { display: flex; flex-direction: column; gap: 0.25rem; }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
 
-        label { font-size: 0.75rem; font-weight: 600; color: var(--text-light); }
+        label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-light);
+        }
 
-        input, select {
+        input,
+        select {
             padding: 0.5rem 0.75rem;
             border: 1px solid var(--border);
             border-radius: 6px;
@@ -87,7 +117,10 @@
             opacity: 1;
         }
 
-        input:focus, select:focus { border-color: var(--primary); }
+        input:focus,
+        select:focus {
+            border-color: var(--primary);
+        }
 
         .section-header {
             grid-column: 1 / -1;
@@ -118,20 +151,35 @@
             transition: opacity 0.2s;
         }
 
-        .btn-submit:hover { opacity: 0.9; }
+        .btn-submit:hover {
+            opacity: 0.9;
+        }
 
-        @media (max-width: 1024px) { .form-grid { grid-template-columns: repeat(3, 1fr); } }
-        @media (max-width: 768px) { 
-            body { overflow-y: auto; height: auto; padding: 1rem; }
-            .form-grid { grid-template-columns: repeat(2, 1fr); }
+        @media (max-width: 1024px) {
+            .form-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                overflow-y: auto;
+                height: auto;
+                padding: 1rem;
+            }
+
+            .form-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
+
 <body>
 
     <div class="container">
         <header>
-            <h1>Mobile Price Estimator</h1>
+            <h1>Mobile Price Predictor</h1>
             {% if prediction %}
             <div class="prediction-box">
                 <span class="prediction-label">Result:</span>
@@ -144,14 +192,15 @@
             {% csrf_token %}
             <div class="form-grid">
                 <div class="section-header">Performance & Storage</div>
-                
+
                 <div class="input-group">
                     <label>RAM (MB)</label>
                     <input type="number" name="ram" placeholder="e.g. 2048" value="{{ inputs.ram }}" required>
                 </div>
                 <div class="input-group">
                     <label>Battery (mAh)</label>
-                    <input type="number" name="battery_power" placeholder="e.g. 1500" value="{{ inputs.battery_power }}" required>
+                    <input type="number" name="battery_power" placeholder="e.g. 1500" value="{{ inputs.battery_power }}"
+                        required>
                 </div>
                 <div class="input-group">
                     <label>Cores</label>
@@ -159,18 +208,21 @@
                 </div>
                 <div class="input-group">
                     <label>Clock (GHz)</label>
-                    <input type="number" name="clock_speed" placeholder="e.g. 2.2" step="0.1" value="{{ inputs.clock_speed }}" required>
+                    <input type="number" name="clock_speed" placeholder="e.g. 2.2" step="0.1"
+                        value="{{ inputs.clock_speed }}" required>
                 </div>
                 <div class="input-group">
                     <label>Internal Mem (GB)</label>
-                    <input type="number" name="int_memory" placeholder="e.g. 64" value="{{ inputs.int_memory }}" required>
+                    <input type="number" name="int_memory" placeholder="e.g. 64" value="{{ inputs.int_memory }}"
+                        required>
                 </div>
 
                 <div class="section-header">Display & Body</div>
 
                 <div class="input-group">
                     <label>Px Height</label>
-                    <input type="number" name="px_height" placeholder="e.g. 800" value="{{ inputs.px_height }}" required>
+                    <input type="number" name="px_height" placeholder="e.g. 800" value="{{ inputs.px_height }}"
+                        required>
                 </div>
                 <div class="input-group">
                     <label>Px Width</label>
@@ -186,11 +238,13 @@
                 </div>
                 <div class="input-group">
                     <label>Weight (g)</label>
-                    <input type="number" name="mobile_wt" placeholder="e.g. 150" value="{{ inputs.mobile_wt }}" required>
+                    <input type="number" name="mobile_wt" placeholder="e.g. 150" value="{{ inputs.mobile_wt }}"
+                        required>
                 </div>
                 <div class="input-group">
                     <label>Depth (cm)</label>
-                    <input type="number" name="m_dep" placeholder="e.g. 0.5" step="0.1" value="{{ inputs.m_dep }}" required>
+                    <input type="number" name="m_dep" placeholder="e.g. 0.5" step="0.1" value="{{ inputs.m_dep }}"
+                        required>
                 </div>
 
                 <div class="section-header">Cameras & Battery life</div>
@@ -213,43 +267,43 @@
                 <div class="input-group">
                     <label>Bluetooth</label>
                     <select name="blue">
-                        <option value="1" {% if inputs.blue == '1' %}selected{% endif %}>Yes</option>
-                        <option value="0" {% if inputs.blue == '0' %}selected{% endif %}>No</option>
+                        <option value="1" {% if inputs.blue=='1' %}selected{% endif %}>Yes</option>
+                        <option value="0" {% if inputs.blue=='0' %}selected{% endif %}>No</option>
                     </select>
                 </div>
                 <div class="input-group">
                     <label>Dual SIM</label>
                     <select name="dual_sim">
-                        <option value="1" {% if inputs.dual_sim == '1' %}selected{% endif %}>Yes</option>
-                        <option value="0" {% if inputs.dual_sim == '0' %}selected{% endif %}>No</option>
+                        <option value="1" {% if inputs.dual_sim=='1' %}selected{% endif %}>Yes</option>
+                        <option value="0" {% if inputs.dual_sim=='0' %}selected{% endif %}>No</option>
                     </select>
                 </div>
                 <div class="input-group">
                     <label>4G</label>
                     <select name="four_g">
-                        <option value="1" {% if inputs.four_g == '1' %}selected{% endif %}>Yes</option>
-                        <option value="0" {% if inputs.four_g == '0' %}selected{% endif %}>No</option>
+                        <option value="1" {% if inputs.four_g=='1' %}selected{% endif %}>Yes</option>
+                        <option value="0" {% if inputs.four_g=='0' %}selected{% endif %}>No</option>
                     </select>
                 </div>
                 <div class="input-group">
                     <label>3G</label>
                     <select name="three_g">
-                        <option value="1" {% if inputs.three_g == '1' %}selected{% endif %}>Yes</option>
-                        <option value="0" {% if inputs.three_g == '0' %}selected{% endif %}>No</option>
+                        <option value="1" {% if inputs.three_g=='1' %}selected{% endif %}>Yes</option>
+                        <option value="0" {% if inputs.three_g=='0' %}selected{% endif %}>No</option>
                     </select>
                 </div>
                 <div class="input-group">
                     <label>Touch Screen</label>
                     <select name="touch_screen">
-                        <option value="1" {% if inputs.touch_screen == '1' %}selected{% endif %}>Yes</option>
-                        <option value="0" {% if inputs.touch_screen == '0' %}selected{% endif %}>No</option>
+                        <option value="1" {% if inputs.touch_screen=='1' %}selected{% endif %}>Yes</option>
+                        <option value="0" {% if inputs.touch_screen=='0' %}selected{% endif %}>No</option>
                     </select>
                 </div>
                 <div class="input-group">
                     <label>WiFi</label>
                     <select name="wifi">
-                        <option value="1" {% if inputs.wifi == '1' %}selected{% endif %}>Yes</option>
-                        <option value="0" {% if inputs.wifi == '0' %}selected{% endif %}>No</option>
+                        <option value="1" {% if inputs.wifi=='1' %}selected{% endif %}>Yes</option>
+                        <option value="0" {% if inputs.wifi=='0' %}selected{% endif %}>No</option>
                     </select>
                 </div>
 
@@ -260,4 +314,5 @@
         </form>
     </div>
 </body>
+
 </html>
